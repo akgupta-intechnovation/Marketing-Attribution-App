@@ -130,7 +130,7 @@ export function UseCases() {
       const selectedUseCase = useCases.find(uc => uc.id === selectedCase);
       if (selectedUseCase && selectedUseCase.setupStatus !== 'coming_soon') {
         if (selectedCase === 'marketing') {
-          navigate('/setup-acquisition');
+          navigate('/setup-visitor-analytics');
         } else if (selectedCase === 'product') {
           navigate('/setup-product');
         } else {

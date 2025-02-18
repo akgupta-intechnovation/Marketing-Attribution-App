@@ -11,6 +11,8 @@ import { DataSources } from './pages/DataSources';
 import { Success } from './pages/Success';
 import { SetupAcquisition } from './pages/SetupAcquisition';
 import { SetupProductAnalytics } from './pages/SetupProductAnalytics';
+import { SetupVisitorAnalytics } from './pages/SetupVisitorAnalytics';
+import { VisitorAnalytics } from './pages/VisitorAnalytics';
 import Dashboard from './pages/Dashboard';
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -29,6 +31,8 @@ function App() {
             <Route path="/connect" element={<DataSources />} />
             <Route path="/setup-acquisition" element={<SetupAcquisition />} />
             <Route path="/setup-product" element={<SetupProductAnalytics />} />
+            <Route path="/setup-visitor-analytics" element={<SetupVisitorAnalytics />} />
+            <Route path="/visitor-analytics" element={<VisitorAnalytics />} />
             <Route path="/success" element={<Success />} />
             <Route path="/dashboard" element={<Dashboard />} />
           </Route>
@@ -38,4 +42,4 @@ function App() {
   );
 }
 
-export default App
+export default App;
