@@ -1,20 +1,20 @@
-import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { OnboardingLayout } from './components/OnboardingLayout';
-import { Welcome } from './pages/Welcome';
-import { Signup } from './pages/Signup';
-import { VerifyEmail } from './pages/VerifyEmail';
-import { EnrichmentLoading } from './pages/EnrichmentLoading';
-import { EnrichmentResults } from './pages/EnrichmentResults';
-import { UseCases } from './pages/UseCases';
-import { DataSources } from './pages/DataSources';
-import { Success } from './pages/Success';
-import { SetupAcquisition } from './pages/SetupAcquisition';
-import { SetupProductAnalytics } from './pages/SetupProductAnalytics';
-import { SetupVisitorAnalytics } from './pages/SetupVisitorAnalytics';
-import { VisitorAnalytics } from './pages/VisitorAnalytics';
-import Dashboard from './pages/Dashboard';
-import { ThemeProvider } from './contexts/ThemeContext';
+import React from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { OnboardingLayout } from "./components/OnboardingLayout";
+import { Welcome } from "./pages/Welcome";
+import { Signup } from "./pages/Signup";
+import { VerifyEmail } from "./pages/VerifyEmail";
+import { EnrichmentLoading } from "./pages/EnrichmentLoading";
+import { EnrichmentResults } from "./pages/EnrichmentResults";
+import { UseCases } from "./pages/UseCases";
+import { DataSources } from "./pages/DataSources";
+import { Success } from "./pages/Success";
+import { SetupAcquisition } from "./pages/SetupAcquisition";
+import { SetupProductAnalytics } from "./pages/SetupProductAnalytics";
+import { SetupVisitorAnalytics } from "./pages/SetupVisitorAnalytics";
+import { VisitorAnalytics } from "./pages/VisitorAnalytics";
+import Dashboard from "./pages/Dashboard";
+import { ThemeProvider } from "./contexts/ThemeContext";
 
 function App() {
   return (
@@ -30,8 +30,11 @@ function App() {
             <Route path="/customize" element={<UseCases />} />
             <Route path="/connect" element={<DataSources />} />
             <Route path="/setup-acquisition" element={<SetupAcquisition />} />
-            <Route path="/setup-product" element={<SetupProductAnalytics />} />
-            <Route path="/setup-visitor-analytics" element={<SetupVisitorAnalytics />} />
+            <Route path="/setup-product" element={<SetupAcquisition />} />
+            <Route
+              path="/setup-visitor-analytics"
+              element={<SetupVisitorAnalytics />}
+            />
             <Route path="/visitor-analytics" element={<VisitorAnalytics />} />
             <Route path="/success" element={<Success />} />
             <Route path="/dashboard" element={<Dashboard />} />

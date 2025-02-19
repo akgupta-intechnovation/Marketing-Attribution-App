@@ -201,7 +201,7 @@ export function SetupVisitorAnalytics() {
             ) : isVerified ? (
               <div className="flex items-center space-x-2 text-green-600">
                 <CheckCircle2 className="w-5 h-5" />
-                <span>Tracking verified! View your analytics below.</span>
+                <span>Congratulation, visitor tracking enabled!!</span>
               </div>
             ) : null}
           </div>
