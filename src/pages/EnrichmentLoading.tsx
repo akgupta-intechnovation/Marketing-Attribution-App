@@ -55,7 +55,7 @@ export function EnrichmentLoading() {
     },
     {
       id: 2,
-      text: 'Looing up company data',
+      text: 'Looking up company data',
       icon: <Building2 className="w-5 h-5" />,
       status: 'pending',
       details: [

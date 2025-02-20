@@ -14,6 +14,7 @@ import {
   AlertCircle,
   ArrowLeft
 } from 'lucide-react';
+import { PricingModal } from '../components/PricingModal';
 
 interface EnrichmentData {
   person: {
@@ -42,6 +43,7 @@ export function EnrichmentResults() {
   const [editMode, setEditMode] = useState<'person' | 'company' | null>(null);
   const [formData, setFormData] = useState<EnrichmentData | null>(null);
   const [logoError, setLogoError] = useState(false);
+  const [showPricing, setShowPricing] = useState(false);
 
   useEffect(() => {
     if (!email || !initialEnrichment) {
@@ -101,8 +103,7 @@ export function EnrichmentResults() {
   };
 
   const handleContinue = () => {
-    // In a real app, we'd save the confirmed/updated data
-    navigate('/customize');
+    setShowPricing(true);
   };
 
   return (
@@ -393,6 +394,15 @@ export function EnrichmentResults() {
         <span>Confirm & Continue</span>
         <ArrowRight className="w-5 h-5" />
       </button>
+
+      <PricingModal
+        isOpen={showPricing}
+        onClose={() => setShowPricing(false)}
+        onUpgrade={() => {
+          setShowPricing(false);
+          navigate('/customize');
+        }}
+      />
     </div>
   );
 }

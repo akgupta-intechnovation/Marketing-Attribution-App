@@ -56,7 +56,7 @@ export function Welcome() {
             <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm">
               <div className="flex items-center space-x-3 text-indigo-600 mb-3">
                 <LineChart className="w-6 h-6" />
-                <h3 className="font-semibold">38% Higher ROI</h3>
+                <h3 className="font-semibold">38% Increase in Marketing ROI</h3>
               </div>
               <p className="text-gray-600">
                 Connect every touchpoint to revenue and optimize your marketing spend.
@@ -65,7 +65,7 @@ export function Welcome() {
             <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-sm">
               <div className="flex items-center space-x-3 text-indigo-600 mb-3">
                 <BarChart2 className="w-6 h-6" />
-                <h3 className="font-semibold">52% Better Adoption</h3>
+                <h3 className="font-semibold">52% Better Product Adoption</h3>
               </div>
               <p className="text-gray-600">
                 Understand user behavior and connect product usage to revenue.

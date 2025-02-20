@@ -19,8 +19,8 @@ import {
   Clock
 } from 'lucide-react';
 
-type Team = 'Marketing teams' | 'Product teams' | 'Sales teams' | 'RevOps teams' | 'Engineering teams' | 'Customer Success teams';
-type SetupStatus = 'not_started' | 'in_progress' | 'completed' | 'coming_soon';
+import { Team } from '../types';
+import { UseCase } from '../components/UseCase';
 
 export function UseCases() {
   const navigate = useNavigate();
@@ -130,7 +130,7 @@ export function UseCases() {
       const selectedUseCase = useCases.find(uc => uc.id === selectedCase);
       if (selectedUseCase && selectedUseCase.setupStatus !== 'coming_soon') {
         if (selectedCase === 'marketing') {
-          navigate('/setup-visitor-analytics');
+          navigate('/setup-acquisition');
         } else if (selectedCase === 'product') {
           navigate('/setup-product');
         } else {
@@ -158,60 +158,6 @@ export function UseCases() {
     setSelectedCase(null);
   };
 
-  const getStatusBadge = (status: SetupStatus, setupTime: number, steps: number) => {
-    const setupInfo = (
-      <div className="flex items-center text-xs text-gray-500 ml-2">
-        <Clock className="w-3.5 h-3.5 mr-1" />
-        <span>{setupTime} mins</span>
-        <span className="mx-1">•</span>
-        <span>{steps} steps</span>
-      </div>
-    );
-
-    switch (status) {
-      case 'completed':
-        return (
-          <div className="flex items-center">
-            {setupInfo}
-            <div className="ml-3 flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
-              <CheckCircle2 className="w-3.5 h-3.5 mr-1" />
-              Setup Complete
-            </div>
-          </div>
-        );
-      case 'in_progress':
-        return (
-          <div className="flex items-center">
-            {setupInfo}
-            <div className="ml-3 flex items-center px-2 py-1 rounded-full text-xs font-medium bg-yellow-100 text-yellow-700">
-              <Sparkles className="w-3.5 h-3.5 mr-1" />
-              In Progress
-            </div>
-          </div>
-        );
-      case 'coming_soon':
-        return (
-          <div className="flex items-center">
-            {setupInfo}
-            <div className="ml-3 flex items-center px-2 py-1 rounded-full text-xs font-medium bg-purple-100 text-purple-700">
-              <Rocket className="w-3.5 h-3.5 mr-1" />
-              Coming Soon
-            </div>
-          </div>
-        );
-      case 'not_started':
-        return (
-          <div className="flex items-center">
-            {setupInfo}
-            <div className="ml-3 flex items-center px-2 py-1 rounded-full text-xs font-medium bg-gray-100 text-gray-600">
-              <AlertCircle className="w-3.5 h-3.5 mr-1" />
-              Setup Required
-            </div>
-          </div>
-        );
-    }
-  };
-
   const filteredUseCases = selectedTeams.length === 0
     ? useCases
     : useCases.filter(useCase => 
@@ -219,82 +165,49 @@ export function UseCases() {
       );
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="flex">
-        {/* Left Panel - Now with light blue gradient */}
-        <div className="w-1/4 bg-gradient-to-br from-indigo-100 via-blue-50 to-indigo-50 text-gray-900 min-h-screen p-8 sticky top-0">
-          <div className="h-full flex flex-col justify-between">
-            <div>
-              <button
-                onClick={() => navigate('/enrichment-results')}
-                className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-12"
-              >
-                <ArrowLeft className="w-5 h-5 mr-2" />
-                <span>Back to Profile</span>
-              </button>
+    <div className="min-h-screen bg-gray-50">
+      {/* Top Panel */}
+      <div className="bg-gradient-to-br from-indigo-100 via-blue-50 to-indigo-50 text-gray-900 p-6 mb-6">
+        <div className="max-w-7xl mx-auto">
+          <button
+            onClick={() => navigate('/enrichment-results')}
+            className="inline-flex items-center text-gray-600 hover:text-gray-900 mb-8"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2" />
+            <span>Back to Profile</span>
+          </button>
 
-              <h1 className="text-4xl font-bold mb-6">
-                Choose Your Focus Area
-              </h1>
-              <p className="text-xl text-gray-600">
-                ThriveStack helps teams like yours solve specific challenges. 
-                Select the use case that best matches your needs, and we'll personalize 
-                your experience accordingly.
-              </p>
-
-              <div className="mt-12 space-y-6">
-                <div className="p-4 bg-white/80 rounded-lg backdrop-blur-sm">
-                  <div className="flex items-center space-x-3 text-gray-900 mb-2">
-                    <Sparkles className="w-5 h-5 text-indigo-600" />
-                    <h3 className="font-semibold">Personalized Setup</h3>
-                  </div>
-                  <p className="text-gray-600">
-                    We'll customize your experience based on your selected focus area.
-                  </p>
-                </div>
-
-                <div className="p-4 bg-white/80 rounded-lg backdrop-blur-sm">
-                  <div className="flex items-center space-x-3 text-gray-900 mb-2">
-                    <Target className="w-5 h-5 text-indigo-600" />
-                    <h3 className="font-semibold">Targeted Insights</h3>
-                  </div>
-                  <p className="text-gray-600">
-                    Get insights and recommendations specific to your goals.
-                  </p>
-                </div>
+          <div className="flex justify-between items-start">
+            <div className="max-w-2xl">
+              <div className="space-y-4">
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-indigo-600 to-blue-600 text-transparent bg-clip-text">
+                  Choose Your Focus Area
+                </h1>
+                <p className="text-xl text-gray-600">
+                  ThriveStack helps teams like yours solve specific challenges. 
+                  Select the use case that best matches your needs, and we'll personalize 
+                  your experience accordingly.
+                </p>
               </div>
             </div>
 
-            {selectedCase && (
-              <div className="fixed bottom-6 right-6 z-50">
-                <button
-                  onClick={handleContinue}
-                  disabled={useCases.find(uc => uc.id === selectedCase)?.setupStatus === 'coming_soon'}
-                  className={`
-                    inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-colors
-                    shadow-lg hover:shadow-xl
-                    ${useCases.find(uc => uc.id === selectedCase)?.setupStatus === 'coming_soon'
-                      ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-indigo-600 text-white hover:bg-indigo-700'
-                    }
-                  `}
-                >
-                  <span>
-                    {useCases.find(uc => uc.id === selectedCase)?.setupStatus === 'coming_soon'
-                      ? 'Coming Soon'
-                      : 'Continue Setup'
-                    }
-                  </span>
-                  <ArrowRight className="w-5 h-5" />
-                </button>
+            <div className="flex space-x-6">
+              <div className="flex items-center space-x-3">
+                <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-full shadow-md">
+                  <Sparkles className="w-4 h-4 mr-2" />
+                  <span className="font-medium">Personalized Setup</span>
+                </div>
               </div>
-            )}
+              <div className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-full shadow-md">
+                <Target className="w-4 h-4 mr-2" />
+                <span className="font-medium">Targeted Insights</span>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Right Panel - Expanded */}
-        <div className="w-3/4 p-8">
-          {/* Team Filters */}
+      <div className="max-w-7xl mx-auto px-4 py-8">
           <div className="mb-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold text-gray-900">Filter by Team</h2>
@@ -334,106 +247,42 @@ export function UseCases() {
           {/* Use Cases Grid - More Compact */}
           <div className="grid grid-cols-1 gap-3">
             {filteredUseCases.map((useCase) => (
-              <div
+              <UseCase
                 key={useCase.id}
-                className={`
-                  bg-white rounded-xl shadow-sm transition-all duration-300
-                  ${selectedCase === useCase.id 
-                    ? 'ring-2 ring-indigo-600' 
-                    : 'hover:shadow-md'
-                  }
-                  cursor-pointer group
-                `}
-              >
-                <div 
-                  className="p-4"
-                  onClick={() => handleSelect(useCase.id)}
-                >
-                  <div className="flex items-start justify-between">
-                    <div className="flex items-start space-x-4">
-                      <div className={`
-                        p-3 rounded-lg transition-colors duration-200 flex-shrink-0
-                        ${selectedCase === useCase.id ? 'bg-indigo-600 text-white' : 'bg-indigo-50 text-indigo-600'}
-                        group-hover:${selectedCase !== useCase.id ? 'bg-indigo-100' : ''}
-                      `}>
-                        {useCase.icon}
-                      </div>
-                      <div>
-                        <div className="flex items-center justify-between">
-                          <h3 className="text-xl font-semibold text-gray-900">
-                            {useCase.title}
-                          </h3>
-                        </div>
-                        <p className="text-gray-600 mb-2">{useCase.shortDesc}</p>
-                        <div className="flex flex-wrap gap-2">
-                          {useCase.teams.map((team, index) => (
-                            <div
-                              key={index}
-                              className="inline-flex items-center px-2 py-1 rounded-md text-xs font-medium bg-indigo-50 text-indigo-700 border border-indigo-100"
-                            >
-                              <Users2 className="w-3 h-3 mr-1" />
-                              {team}
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-center space-x-3">
-                      {getStatusBadge(useCase.setupStatus, useCase.setupTime, useCase.steps)}
-                      <button
-                        onClick={(e) => handleExpand(useCase.id, e)}
-                        className={`
-                          p-1 rounded-full hover:bg-gray-100 transition-transform duration-200
-                          ${expandedCase === useCase.id ? 'rotate-180' : ''}
-                        `}
-                      >
-                        <ChevronDown className="w-5 h-5 text-gray-500" />
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className={`
-                    grid transition-all duration-300 ease-in-out
-                    ${expandedCase === useCase.id ? 'grid-rows-[1fr] mt-4' : 'grid-rows-[0fr]'}
-                  `}>
-                    <div className="overflow-hidden">
-                      <div className="border-t pt-4 space-y-4">
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <h4 className="font-medium text-gray-900 mb-2">Challenge</h4>
-                            <p className="text-gray-600 text-sm">{useCase.challenge}</p>
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-gray-900 mb-2">Solution</h4>
-                            <p className="text-gray-600 text-sm">{useCase.solution}</p>
-                          </div>
-                        </div>
-
-                        <div>
-                          <h4 className="font-medium text-gray-900 mb-2">Key Features</h4>
-                          <div className="grid grid-cols-2 gap-2">
-                            {useCase.features.map((feature, index) => (
-                              <div key={index} className="flex items-center text-sm text-gray-600">
-                                <div className="w-1.5 h-1.5 rounded-full bg-indigo-600 mr-2" />
-                                {feature}
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        <div className="flex items-center text-sm text-indigo-600 font-medium">
-                          {useCase.benefitIcon}
-                          <span className="ml-2">{useCase.benefit}</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                useCase={useCase}
+                isSelected={selectedCase === useCase.id}
+                isExpanded={expandedCase === useCase.id}
+                onSelect={handleSelect}
+                onExpand={handleExpand}
+              />
             ))}
           </div>
         </div>
-      </div>
+
+        {selectedCase && (
+          <div className="fixed bottom-6 right-6 z-50">
+            <button
+              onClick={handleContinue}
+              disabled={useCases.find(uc => uc.id === selectedCase)?.setupStatus === 'coming_soon'}
+              className={`
+                inline-flex items-center justify-center space-x-2 px-6 py-3 rounded-lg font-semibold transition-colors
+                shadow-lg hover:shadow-xl
+                ${useCases.find(uc => uc.id === selectedCase)?.setupStatus === 'coming_soon'
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : 'bg-indigo-600 text-white hover:bg-indigo-700'
+                }
+              `}
+            >
+              <span>
+                {useCases.find(uc => uc.id === selectedCase)?.setupStatus === 'coming_soon'
+                  ? 'Coming Soon'
+                  : 'Continue Setup'
+                }
+              </span>
+              <ArrowRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
     </div>
   );
 }
